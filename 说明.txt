@@ -1,0 +1,169 @@
+*****************************
+基于bootstrap和jquery的表单插件
+author 游玩的兔子
+*****************************
+
+说明：
+1.创建表单中的各种元素，一些可以用于输入，一些只用于显示信息
+2.针对可输入的元素提供输入反馈，需要在参数中配置验证方法
+3.可以通过参数向表单元素中填入内容
+4.可以获取所有表单元素中的内容
+5.提供自定义的元素创建，但如果要实现插件中其他的功能需要重写相应方法
+6.元素所具有的方法都可以被重写
+7.预设的表单元素每个都占一整行
+
+插件使用
+$("表单id").modalFormTool(method, params);
+method的输入为：create,	setValues,	getValues,	setHelpMessage,setFeedbackStatus,	getVerifyResult, setVerify
+
+*****************************
+method: create
+用于表单元素的创建
+params 为配置参数
+*****************************
+
+*****************************
+method: setValues
+用于向表单中的元素填入值
+params 为
+{
+	index:value,
+	index:value
+}
+index索引从0开始，排序为配置参数中表单元素的排序
+*****************************
+
+*****************************
+method: getValues
+获取表单中元素的值
+params 无
+返回值为：Array
+[index:value,index:value]
+
+*****************************
+
+*****************************
+method: setHelpMessage
+向表单中的元素设置帮助信息
+params 为
+{
+	index:value,
+	index:value
+}
+index索引从0开始，排序为配置参数中表单元素的排序
+*****************************
+
+*****************************
+method: setFeedbackStatus
+表单元素的反馈状态设置，将某些表单元素设置为特定的状态
+params 为
+{
+	index:status,
+}
+index索引从0开始，排序为配置参数中表单元素的排序
+需要保证status在对应的元素中已配置
+*****************************
+
+*****************************
+method: getVerifyResult
+获取表单元素的验证结果，当所有表单项的验证结果都为真时结果才为真
+params 无
+*****************************
+
+*****************************
+method: setVerify
+设置表单元素的验证结果
+params 
+{
+	index:value,
+}
+*****************************
+
+
+配置参数：
+{
+	//表单中所有标签的宽度
+	"allLabelCol": 'col-sm-3',
+	//表单中所有元素的宽度
+	"allContentCol": 'col-sm-9',
+	//是否针对输入项开启反馈判断，
+	'hasFeedback':false,
+	//反馈状态和其对应的显示类
+	"feedbackClass":{
+		"success":'has-success',
+		"warning":'has-warning',
+		"error":'has-error',
+		"default":""
+	},
+	//反馈状态和其对应的图标类
+	"feedbackIcon":{
+		"success":'glyphicon-ok',
+		"warning":'glyphicon-warning-sign',
+		"error":'glyphicon-remove',
+		"default":""
+	},
+	//表单元素内容
+	"formContents":[],
+	//重写的方法
+	"overwriteFunctions":[]
+}
+
+单个表单元素内容:
+{
+	//类型，预设为：oneLineText, multiLineText, oneLineInput, multiLineInput, singleSelect, other. 其中other为自定义类型
+	//
+    'type':'',
+    //标签内容
+	'label':'',
+	//表单元素内容的id
+	'id':'',
+	//标签所占宽度，默认为配置参数中的设置
+	'labelCol':'',
+	//表单元素所占宽度,默认为配置参数中的设置
+	'contentCol':'',
+	//表单元素内容
+	'values':'',
+	//反馈的类，默认为配置参数中设置
+	'feedbackClass':{},
+	//反馈图标，默认为配置参数中设置
+	'feedbackIcon':{},
+	//一些提示信息，值为{status:value,} 尽量保证status和反馈中的状态一致
+	'helpMessage':{
+		"default":""
+	},
+	//一些额外的参数，值为{name:value,}一些额外参数填入，如{'checked':'checked','placeholder':'input message'}等
+	'params':{}
+}
+
+重写的方法内容：
+{
+	//需要重写方法的表单元素的索引
+	index:0,
+	//重写的方法名和方法的内容
+	functionName:function,
+	//可重写多个方法
+	functionName:function
+}
+表单元素的方法如下
+create($form, index) 表单元素的创建
+createContent() 表单元素的内容，返回生成的html
+setValue(value) 设置表单元素的值
+getValue() 获取表单元素的值，返回值的内容
+setVerify(verify) 设置表单元素的验证结果
+getVerify()		获取表单元素的验证结果 返回bool值
+setHelpMessage(message) 设置表单元素的帮助信息
+verifyFunction(inputString) 验证输入是否正确的方法，返回true，false或者返回状态名success等
+setFeedbackClass(status) 设置页面中表单元素的反馈样式，根据status
+setFeedbackIcon(status) 设置页面中表单元素的反馈图标，根据status
+setFeedbackStatus(status) 设置页面中表单元素的反馈状态
+getType() 获取表单元素的类型，为表单元素内容中type的值
+
+其中oneLineInput,multiLineInput,singleSelect三种类型有着额外的方法
+getInputContent()  取得表单元素中，单独输入部分的jquery实例
+
+表单元素的属性有：
+options		配置中输入的参数
+value 		表单元素的值
+verify 		表单元素的验证结果
+$this		表单元素的一个jquery实例
+index 		表单元素的索引，根据配置参数的顺序

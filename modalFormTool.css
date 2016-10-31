@@ -1,0 +1,31 @@
+/*****************************************
+        ===
+        This comment should NOT be removed.
+
+        modalFormTool v1.0.0
+		基于bootstrap3
+
+		Copyright 2016.10.20
+        author 游玩的兔子
+        ===
+*****************************************/
+
+form.modalformtool .form-group div.form-control-textarea-static
+{
+	padding-bottom: 9px;
+  padding-top: 9px;
+}
+form.modalformtool .word-wrap
+{
+  word-wrap:break-word;
+  word-break:break-all;
+  white-space: pre-wrap;
+}
+form.modalformtool input,form.modalformtool select,form.modalformtool textarea
+{
+  border-color: #808080;
+}
+form.modalformtool textarea
+{
+	resize: vertical;
+}
