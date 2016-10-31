@@ -1,0 +1,28 @@
+{
+	"name":"modalFormTool",
+	"version":"0.1.0",
+	"title":"modalFormTool",
+	"author":{
+		"name":"游玩的兔子",
+		"email":"youwandetuzi@gmail.com"
+	},
+	"dependencies":{
+		"jquery":">=1.9.1",
+		"bootstrap":"3"
+	},
+	"licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/theironqueen/ModalFormTool/blob/master/LICENSE"
+        }
+    ],
+	"description":"简单的创建表单元素的插件，适合在bootstrap3的modal中使用,能够方便的取值和赋值,以及对输入结果的验证。",
+	"keywords":[
+		"bootstrap",
+		"modal",
+		"form",
+		"verify"
+	],
+	"homepage":"http://theironqueen.github.io/ModalFormTool/",
+	"docs":"https://github.com/theironqueen/ModalFormTool/blob/master/%E8%AF%B4%E6%98%8E.txt"
+}
